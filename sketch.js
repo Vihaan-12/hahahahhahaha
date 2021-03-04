@@ -7,10 +7,12 @@ var engine, world;
 var box1, pig1;
 var backgroundImg,platform;
 var bird, slingShot;
+var tree1;
+var mango1, mango2, mango3, mango4, mango5;
 
-function preload() {
-    backgroundImg = loadImage("sprites/bg.png");
-}
+function preload(){
+	boy=loadImage("boy.png");
+  }
 
 function setup(){
     var canvas = createCanvas(1200,400);
@@ -21,65 +23,58 @@ function setup(){
     ground = new Ground(600,height,1200,20);
     platform = new Ground(150, 305, 300, 170);
 
-    box1 = new Box(700,320,70,70);
-    box2 = new Box(920,320,70,70);
-    pig1 = new Pig(810, 350);
-    log1 = new Log(810,260,300, PI/2);
+    tree1 =new tree(1050,400);
+    
+    mango1 = new mango(1100,100,30);
+    mango3 = new mango(1020,90,30);
+    mango5 = new mango(1100,160,30);
 
-    box3 = new Box(700,240,70,70);
-    box4 = new Box(920,240,70,70);
-    pig3 = new Pig(810, 220);
-
-    log3 =  new Log(810,180,300, PI/2);
-
-    box5 = new Box(810,160,70,70);
-    log4 = new Log(760,120,150, PI/7);
-    log5 = new Log(870,120,150, -PI/7);
-
-    bird = new Bird(200,50);
+    stone1 = new stone(200,50);
 
     //log6 = new Log(230,180,80, PI/2);
-    slingshot = new SlingShot(bird.body,{x:200, y:50});
+    slingshot = new SlingShot(stone1.body,{x:200, y:50});
 }
 
 function draw(){
-    background(backgroundImg);
+    background("gray");
     Engine.update(engine);
     //strokeWeight(4);
-    box1.display();
-    box2.display();
+   
+    image(boy ,150,5,200,300);
+
+tree1.display();
+
     ground.display();
-    pig1.display();
-    log1.display();
 
-    box3.display();
-    box4.display();
-    pig3.display();
-    log3.display();
-
-    box5.display();
-    log4.display();
-    log5.display();
-
-    bird.display();
+    stone1.display();
     platform.display();
+
+mango1.display();
+mango3.display();
+mango5.display();
+
+textSize(25);
+text("press space for another chance", 100,30);
+
     //log6.display();
     slingshot.display();    
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    Matter.Body.setPosition(stone1.body, {x: mouseX , y: mouseY});
+
 }
 
 
 function mouseReleased(){
+
     slingshot.fly();
 }
 
 function keyPressed(){
 
 if(keyCode===32){
-    slingshot.attach(bird.body);
+    slingshot.attach(stone1.body);
 }
 
 }
